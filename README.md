@@ -31,7 +31,7 @@ Evaluated across the **TCP** and **ABCGMP** multi-crop pathology benchmarks span
 | Dataset | Total Crops | Total Classes | Parameters | CBAM MLP Activation | Training Accuracy | Validation Accuracy |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **TCP** | $3$ | $20$ | $0.139\text{M}$ | **ReLU** | $94.45\%$ | **$86.80\%$** |
-| **ABCGMP** | $6$ | $24$ | $0.139\text{M}$ | **Swish** | $91.88\%$ | **$84.16\%$** |
+| **ABCGMP** | $6$ | $24$ | $0.141\text{M}$ | **Swish** | $91.88\%$ | **$84.16\%$** |
 
 ---
 
