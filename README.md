@@ -9,7 +9,7 @@
 
 **PlantfyCropNetLight** is an ultra-lightweight, parameter-efficient convolutional neural network (CNN) engineered specifically for robust, real-time plant disease classification on resource-constrained edge devices. 
 
-Deploying deep learning models in real-world agricultural fields is often hindered by high computational overhead, memory constraints, complex field background noise, intra-class variations, and subtle visual similarities between different crop diseases. PlantfyCropNetLight overcomes these challenges with an exceptionally low footprint of just **$0.139$ million parameters** while delivering competitive diagnostic accuracy across multiple horticultural and vegetable pathology benchmarks.
+Deploying deep learning models in real-world agricultural fields is often hindered by high computational overhead, memory constraints, complex field background noise, intra-class variations, and subtle visual similarities between different crop diseases. PlantfyCropNetLight overcomes these challenges with an exceptionally low footprint of just **$0.139-$0.141$ million parameters** while delivering competitive diagnostic accuracy across multiple horticultural and vegetable pathology benchmarks.
 
 ---
 
@@ -19,29 +19,29 @@ Deploying deep learning models in real-world agricultural fields is often hinder
 * **Dual Global Pooling ($\text{GAP} + \text{GMP}$):** Combines Global Average Pooling and Global Max Pooling to capture both holistic context and salient localized disease indicators for enhanced feature representation.
 * **Convolutional Block Attention Modules (CBAM):** Refines channel and spatial feature maps to focus on subtle disease symptoms while actively suppressing noisy field backgrounds.
 * **Dataset-Specific Activation Optimization:** Empirical investigation within the shared Multi-Layer Perceptron (MLP) block of CBAM demonstrates that:
-  * **Swish** optimizes generalization on the **ABCGMP** dataset.
-  * **ReLU** achieves superior performance on the **TCP** dataset.
+  * **Swish** optimizes generalization on the **MultiFruit-6D** dataset.
+  * **ReLU** achieves superior performance on the **TriCrop-Field** dataset.
 
 ---
 
 ## Experimental Results
 
-Evaluated across the **TCP** and **ABCGMP** multi-crop pathology benchmarks spanning eight major fruit and vegetable crops, PlantfyCropNetLight outperforms leading state-of-the-art lightweight models across Accuracy, Precision, Recall, and $F_1$-Score:
+Evaluated across the **TriCrop-Field** and **MultiFruit-6D** multi-crop pathology benchmarks spanning eight major fruit and vegetable crops, PlantfyCropNetLight outperforms leading state-of-the-art lightweight models across Accuracy, Precision, Recall, and $F_1$-Score:
 
 | Dataset | Total Crops | Total Classes | Parameters | CBAM MLP Activation | Training Accuracy | Validation Accuracy |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **TCP** | $3$ | $20$ | $0.139\text{M}$ | **ReLU** | $94.45\%$ | **$86.80\%$** |
-| **ABCGMP** | $6$ | $24$ | $0.141\text{M}$ | **Swish** | $91.88\%$ | **$84.16\%$** |
+| **TTriCrop-Field** | $3$ | $20$ | $0.139\text{M}$ | **ReLU** | $94.45\%$ | **$86.80\%$** |
+| **MultiFruit-6D** | $6$ | $24$ | $0.141\text{M}$ | **Swish** | $91.88\%$ | **$84.16\%$** |
 
 ---
 
 ## Datasets
 
-### 1. TCP Dataset
-The **TCP** dataset comprises **$9,541$ images** distributed across **3 main crops** (Tomato, Chilli, and Papaya) spanning **$20$ distinct classes**.
+### 1. TriCrop-Field Dataset
+The **TriCrop-Field** dataset comprises **$9,541$ images** distributed across **3 main crops** (Tomato, Chilli, and Papaya) spanning **$20$ distinct classes**.
 
 <details>
-<summary><b>Click to view TCP Class & Image Distribution</b></summary>
+<summary><b>Click to view TriCrop-Field Class & Image Distribution</b></summary>
 
 | S.No | Crop | Class | No. of Images |
 | :---: | :--- | :--- | :---: |
@@ -71,11 +71,11 @@ The **TCP** dataset comprises **$9,541$ images** distributed across **3 main cro
 
 ---
 
-### 2. ABCGMP Dataset
-The **ABCGMP** dataset comprises **$10,113$ images** distributed across **6 major fruit crops** (Apple, Banana, Citrus, Guava, Mango, and Papaya), with $4$ classes per crop spanning **$24$ distinct classes**.
+### 2. MultiFruit-6D Dataset
+The **MultiFruit-6D** dataset comprises **$10,113$ images** distributed across **6 major fruit crops** (Apple, Banana, Citrus, Guava, Mango, and Papaya), with $4$ classes per crop spanning **$24$ distinct classes**.
 
 <details>
-<summary><b>Click to view ABCGMP Class & Image Distribution</b></summary>
+<summary><b>Click to view MultiFruit-6D Class & Image Distribution</b></summary>
 
 | S.No | Crop | Class | No. of Images | S.No | Crop | Class | No. of Images |
 | :---: | :--- | :--- | :---: | :---: | :--- | :--- | :---: |
@@ -101,8 +101,8 @@ The **ABCGMP** dataset comprises **$10,113$ images** distributed across **6 majo
 
 ```text
 PlantfyCropNetLight/
-├── assets/                  # Architecture diagrams & sample dataset figures (TCP.png, ABCGMP-55.png)
-├── configs/                 # Dataset-specific hyperparameters (ReLU for TCP, Swish for ABCGMP)
+├── assets/                  # Architecture diagrams & sample dataset figures (TriCrop-Field.png, MultiFruit-6D-55.png)
+├── configs/                 # Dataset-specific hyperparameters (ReLU for TriCrop-Field, Swish for MultiFruit-6D)
 ├── data/                    # Dataset directory & preprocessing scripts
 ├── models/                  # PlantfyCropNetLight architecture & CBAM modules
 ├── train.py                 # Training and validation pipeline
@@ -128,11 +128,11 @@ pip install -r requirements.txt
 
 ### 3. Train & Evaluate
 ```bash
-# Train on TCP dataset (uses ReLU in CBAM MLP)
-python train.py --dataset TCP --activation relu
+# Train on TriCrop-Field dataset (uses ReLU in CBAM MLP)
+python train.py --dataset TriCrop-Field --activation relu
 
-# Train on ABCGMP dataset (uses Swish in CBAM MLP)
-python train.py --dataset ABCGMP --activation swish
+# Train on MultiFruit-6D dataset (uses Swish in CBAM MLP)
+python train.py --dataset MultiFruit-6D --activation swish
 ```
 
 ---
@@ -151,8 +151,8 @@ If you find **PlantfyCropNetLight** or the benchmark datasets useful in your res
 ```
 
 ### Dataset References
-* **TCP Dataset:** Jain et al., *Novel TCP Crop Disease Dataset*, 2026 (`\cite{jain2026novel}`).
-* **ABCGMP Dataset:** Nain et al., *Comprehensive ABCGMP Crop Disease Dataset*, 2026 (`\cite{nain2026comprehensive}`).
+* **TriCrop-Field Dataset:** Jain et al., *Novel TriCrop-Field Crop Disease Dataset*, 2026 (`\cite{jain2026novel}`).
+* **MultiFruit-6D Dataset:** Nain et al., *Comprehensive MultiFruit-6D Crop Disease Dataset*, 2026 (`\cite{nain2026comprehensive}`).
 
 ---
 
